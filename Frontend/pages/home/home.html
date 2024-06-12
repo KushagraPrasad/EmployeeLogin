@@ -51,11 +51,17 @@
             color: #fff;
             cursor: pointer;
             margin-top: 10px;
+            text-align: center;
+            text-decoration: none;
         }
 
         .btn:disabled {
             background-color: #6c757d;
             cursor: not-allowed;
+        }
+
+        .hidden {
+            display: none;
         }
     </style>
 </head>
@@ -68,7 +74,9 @@
                 <div class="user-details" id="userDetails">
                     <!-- Employee details will be displayed here -->
                 </div>
-                <button class="btn" id="markPresentBtn">Mark Present</button>
+                <button class="btn hidden" id="markPresentBtn">Mark Present</button>
+                <a href="dashboard.html" class="btn hidden" id="dashboardBtn">Go to Dashboard</a>
+                <button class="btn hidden" id="addTaskBtn">Add Task</button>
                 <button class="btn" id="logoutBtn">Logout</button>
             </div>
         </div>

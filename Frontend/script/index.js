@@ -1,5 +1,28 @@
-// index.js (Login script)
 console.log("script is connected");
+
+document.addEventListener('DOMContentLoaded', async function () {
+    const token = localStorage.getItem('token');
+
+    if (token) {
+        try {
+            const response = await fetch('http://localhost:9999/auth/validate', {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            if (response.ok) {
+                console.log('Token is valid');
+                window.location.href = './pages/home/home.html'; // Redirect to home page
+            } else {
+                console.log('Token is invalid');
+            }
+        } catch (error) {
+            console.error('Error validating token:', error);
+        }
+    }
+});
 
 document.getElementById('loginForm').addEventListener('submit', async function (event) {
     event.preventDefault();
@@ -21,11 +44,9 @@ document.getElementById('loginForm').addEventListener('submit', async function (
             console.log('Login successful');
             console.log('Token:', responseData.token);
 
-            // Save token and email in localStorage
             localStorage.setItem('token', responseData.token);
 
-            // Redirect to home.html
-            window.location.href = './pages/home/home.html';
+            window.location.href = './pages/home/home.html'; // Redirect to home page after successful login
         } else {
             console.error('Login failed');
             alert('Invalid email or password. Please try again.');

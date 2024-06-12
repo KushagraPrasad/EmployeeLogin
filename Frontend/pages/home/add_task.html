@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Task</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            border: none;
+            border-radius: 4px;
+            color: #fff;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        .btn:disabled {
+            background-color: #6c757d;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Add Task</h2>
+        <form id="taskForm">
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea id="description" rows="4" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="dueDate">Due Date</label>
+                <input type="date" id="dueDate" required>
+            </div>
+            <div class="form-group">
+                <label for="assigneeEmail">Assignee Email</label>
+                <input type="email" id="assigneeEmail" required>
+            </div>
+            <button type="submit" class="btn">Add Task</button>
+        </form>
+        <button id="goBackBtn" class="btn">Go Back to Home</button>
+    </div>
+    <script src="/script/add_task.js"></script>
+</body>
+</html>

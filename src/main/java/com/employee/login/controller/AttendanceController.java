@@ -4,6 +4,7 @@ import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +26,22 @@ public class AttendanceController {
 
 	@Autowired
 	private JwtService jwtService;
+
+	@GetMapping("/status")
+	public ResponseEntity<String> checkAttendanceStatus(@RequestHeader("Authorization") String token) {
+		String email = jwtService.extractUsername(token.substring(7));
+		Long userId = userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("User not found"))
+				.getId();
+		Date currentDate = new Date();
+		Date dateWithoutTime = attendanceService.stripTime(currentDate);
+
+		boolean isMarked = attendanceService.isAttendanceMarked(userId, dateWithoutTime);
+		if (isMarked) {
+			return ResponseEntity.ok("Attendance already marked for today");
+		} else {
+			return ResponseEntity.ok("Attendance not marked for today");
+		}
+	}
 
 	@PostMapping("/mark")
 	public ResponseEntity<String> markAttendance(@RequestHeader("Authorization") String token) {
